@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incident Logbook — SkyPulse-Ops</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Safety &amp; Incident Logbook</h1>
+        <p>Near-misses, equipment failures, weather delays, and corrective actions.</p>
+      </div>
+      <button class="primary" onclick="openIncidentModal()">+ Log incident</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>All entries</h2>
+        <div style="display:flex; gap:8px;">
+          <select id="filter-status" onchange="load()">
+            <option value="">All statuses</option>
+            <option value="open">Open</option>
+            <option value="investigating">Investigating</option>
+            <option value="resolved">Resolved</option>
+            <option value="closed">Closed</option>
+          </select>
+          <select id="filter-severity" onchange="load()">
+            <option value="">All severities</option>
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+      </div>
+      <div class="panel-body" id="incident-table"></div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="incident-modal">
+  <div class="modal">
+    <h2>Log incident</h2>
+    <form id="incident-form">
+      <div class="form-grid">
+        <div class="field">
+          <label>Aircraft</label>
+          <select name="aircraft_id" id="incident-aircraft-select">
+            <option value="">Unassigned / N/A</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select name="category">
+            <option value="near_miss">Near miss</option>
+            <option value="equipment_failure">Equipment failure</option>
+            <option value="weather_delay">Weather delay</option>
+            <option value="airspace_violation">Airspace violation</option>
+            <option value="lost_link">Lost link</option>
+            <option value="anomaly" selected>Anomaly</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Severity</label>
+          <select name="severity">
+            <option value="low" selected>Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+        <div class="field"><label>Location</label><input name="location" placeholder="Site or coordinates"></div>
+      </div>
+      <div class="field"><label>Description</label><textarea name="description" required placeholder="What happened, when, and any immediate response taken"></textarea></div>
+      <div class="field"><label>Corrective action (optional)</label><textarea name="corrective_action"></textarea></div>
+      <div class="field"><label>Reported by</label><input name="reported_by" placeholder="Your name"></div>
+      <div class="modal-actions">
+        <button type="button" onclick="closeModal('incident-modal')">Cancel</button>
+        <button type="submit" class="primary">Log incident</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="/js/api.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/incidents.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleet — SkyPulse-Ops</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Fleet</h1>
+        <p>Airframe status, maintenance cycles, and firmware compliance.</p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button onclick="openImportModal()">Import flight log</button>
+        <button class="primary" onclick="openAircraftModal()">+ Register aircraft</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-body" id="fleet-table"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Register aircraft modal -->
+<div class="modal-backdrop" id="aircraft-modal">
+  <div class="modal">
+    <h2>Register aircraft</h2>
+    <form id="aircraft-form">
+      <div class="form-grid">
+        <div class="field"><label>Tail number</label><input name="tail_number" required placeholder="SP-103"></div>
+        <div class="field"><label>Model</label><input name="model" required placeholder="WingScout Mk3"></div>
+        <div class="field"><label>Firmware version</label><input name="firmware_version" placeholder="2.4.1"></div>
+        <div class="field"><label>Maintenance interval (hrs)</label><input name="maintenance_interval_hours" type="number" value="50"></div>
+        <div class="field"><label>Home base</label><input name="home_base" placeholder="Lilongwe Field Station"></div>
+        <div class="field"><label>Status</label>
+          <select name="status">
+            <option value="active">Active</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="grounded">Grounded</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Notes</label><textarea name="notes"></textarea></div>
+      <div class="modal-actions">
+        <button type="button" onclick="closeModal('aircraft-modal')">Cancel</button>
+        <button type="submit" class="primary">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Import flight log modal -->
+<div class="modal-backdrop" id="import-modal">
+  <div class="modal">
+    <h2>Import flight log</h2>
+    <p class="dim" style="margin-top:-8px; font-size:13px;">
+      CSV with <code>timestamp,latitude,longitude,altitude_m</code> columns. See README for details.
+    </p>
+    <form id="import-form">
+      <div class="field">
+        <label>Aircraft</label>
+        <select name="aircraft_id" id="import-aircraft-select" required></select>
+      </div>
+      <div class="field">
+        <label>Log file (.csv)</label>
+        <input type="file" name="logfile" accept=".csv" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" onclick="closeModal('import-modal')">Cancel</button>
+        <button type="submit" class="primary">Import</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="/js/api.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/fleet.js"></script>
+</body>
+</html>
