@@ -1,0 +1,24 @@
+{
+  "name": "skypulse-ops",
+  "version": "1.0.0",
+  "description": "Open-source flight dispatch and incident management system for humanitarian and conservation UAV operations.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node seed.js"
+  },
+  "keywords": ["uav", "drone", "flight-ops", "humanitarian", "conservation", "dispatch"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.3",
+    "morgan": "^1.12.1",
+    "multer": "^2.4.0"
+  }
+}
