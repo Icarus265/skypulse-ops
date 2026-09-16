@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — SkyPulse-Ops</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Mission &amp; Fleet Dashboard</h1>
+        <p>Fleet status, recent activity, and open safety items at a glance.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid" id="stat-grid"></div>
+
+    <div class="panel">
+      <div class="panel-header"><h2>Recent Flights</h2><a href="/fleet.html">View fleet →</a></div>
+      <div class="panel-body" id="recent-flights"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><h2>Recent Incidents</h2><a href="/incidents.html">View logbook →</a></div>
+      <div class="panel-body" id="recent-incidents"></div>
+    </div>
+  </main>
+</div>
+<div id="toast"></div>
+<script src="/js/api.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>
